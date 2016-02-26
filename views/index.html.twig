@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Urbaca Salon</title>
+    </head>
+    <body>
+        <div class="container">
+<!--Header-->
+            <div class="page-header">
+                <h1>Urbaca Salon</h1>
+            </div>
+<!--List of Stylists-->
+            {% if stylists is not empty %}
+                <h2>Stylists:</h2>
+                <ul>
+                    {% for stylist in stylists %}
+                        <li><a href="/stylist/{{ stylist.getId }}">{{ stylist.getName }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h2>No Stylists Added.</h2>
+            {% endif %}
+<!--Add Stylist -->
+            <h3>Add a Stylist</h3>
+            <form class="" action="/stylist/add" method="post">
+                <label for="name">Full Name:</label>
+                <input type="text" name="name" value="">
+                <label for="services">Services:</label>
+                <input type="text" name="services" value="">
+                <label for="phone">Phone Contact:</label>
+<!-- ?? WILL THE INPUT TYPE 'NUMBER' RETURN A STRING ??-->
+                <input type="number" name="phone" value="">
+                <button type="submit" name="button">Add Stylist</button>
+            </form>
+        </div>
+    </body>
+</html>
