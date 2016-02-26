@@ -38,6 +38,13 @@
         return $app['twig']->render('stylist.html.twig', array('stylist'=>$stylist, 'clients'=>$matching_clients));
     });
 
+    $app->post('/delete/all', function() use ($app) {
+        Stylist::deleteAll();
+        Client::deleteAll();
+        $stylists = Stylist::getAll();
+        return $app['twig']->render('index.html.twig', array('stylists'=>$stylists));
+    });
+
 /* Individual Stylist pages */
     $app->get('/client/add/{id}', function($id) use ($app) {
         $stylist = Stylist::find($id);

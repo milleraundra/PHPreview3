@@ -71,6 +71,30 @@
             $GLOBALS['DB']->exec("DELETE FROM clients");
         }
 
+        static function find($id)
+        {
+            $all_clients = Client::getAll();
+            $matching_client = null;
+            foreach($all_clients as $client) {
+                $client_id = $client->getId();
+                if($client_id == $id) {
+                    $matching_client = $client;
+                }
+            }
+            return $matching_client;
+        }
+
+        function update($new_client, $new_number)
+        {
+            $GLOBALS['DB']->exec("UPDATE clients SET name ='{$new_client}', phone ='{$new_number}' WHERE id={$this->getId()};");
+            $this->setClient($new_client);
+            $this->setNumber($new_number);
+        }
+
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM clients WHERE id={$this->getId()};");
+        }
 
     }
 
