@@ -182,6 +182,18 @@
 
         }
 
+        function test_getClients()
+        {
+            $name = "Gretchen Lou";
+            $services = "Cut/Style, Color, Highlights";
+            $phone = "5033902341";
+            $id = null;
+            $stylist_test = new Stylist($name, $services, $phone, $id);
+            $stylist_test->save();
+
+            
+        }
+
     }
 
 

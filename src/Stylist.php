@@ -110,6 +110,11 @@
             $this->setPhone($new_phone);
         }
 
+        // function getClients()
+        // {
+        //     $
+        // }
+
     }
 
 

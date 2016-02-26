@@ -1,0 +1,104 @@
+mysql> SHOW DATABASES
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| cuisine            |
+| cuisine_test       |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> DELETE FROM cuisine_test
+    -> ;
+ERROR 1046 (3D000): No database selected
+mysql> DELETE cuisine_test
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> DROP DATABASE cuisine_test;
+Query OK, 2 rows affected (0.03 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| cuisine            |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> DROP DATABASE cuisine;
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> CREATE DATABASE hair_salon;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE hair_salon;
+Database changed
+mysql> CREATE TABLE stylists(id serial PRIMARY KEY, name VARCHAR(255), services VARCHAR(255), phone INT);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> ALTER TABLE stylists DROP phone;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE stylist ADD phone VARCHAR(20);
+ERROR 1146 (42S02): Table 'hair_salon.stylist' doesn't exist
+mysql> ALTER TABLE stylists ADD phone VARCHAR(20);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE stylists;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | bigint(20) unsigned | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(255)        | YES  |     | NULL    |                |
+| services | varchar(255)        | YES  |     | NULL    |                |
+| phone    | varchar(20)         | YES  |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE stylists DROP phone;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE stylists ADD phone INT;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE stylists;
++----------+---------------------+------+-----+---------+----------------+
+| Field    | Type                | Null | Key | Default | Extra          |
++----------+---------------------+------+-----+---------+----------------+
+| id       | bigint(20) unsigned | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(255)        | YES  |     | NULL    |                |
+| services | varchar(255)        | YES  |     | NULL    |                |
+| phone    | int(11)             | YES  |     | NULL    |                |
++----------+---------------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE stylists DROP phone;
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE stylists ADD phone VARCHAR(20);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE clients(id serial PRIMARY KEY, name VARCHAR(255), phone VARCHAR(20), stylist_id TINYINT);
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> ALTER TABLE clients DROP stylist_id;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE clients ADD stylist_id INT;
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
