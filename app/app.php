@@ -80,6 +80,19 @@
         return $app['twig']->render('stylist.html.twig', array('stylist'=>$stylist, 'clients'=>$matching_clients));
     });
 
+/* View Individual Client */
+    $app->get('/client/{id}', function($id) use ($app) {
+        $client = Client::find($id);
+        $stylist= Stylist::find($client->getStylistId());
+        return $app['twig']->render('client.html.twig', array('client'=>$client, 'stylist'=>$stylist));
+    });
+    $app->get('/client/update/{id}', function($id) use ($app) {
+        $client = Client::find($id);
+        return $app['twig']->render('client_edit_delete.html.twig', array('client'=>$client));
+    });
+/* Edit Individual Client Info */
+
+
     return $app;
 
 
