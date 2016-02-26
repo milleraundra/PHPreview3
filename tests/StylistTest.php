@@ -162,6 +162,26 @@
             $this->assertEquals([$stylist_test], $result);
         }
 
+        function test_update()
+        {
+            $name = "Gretchen Lou";
+            $services = "Cut/Style, Color, Highlights";
+            $phone = "5033902341";
+            $id = null;
+            $stylist_test = new Stylist($name, $services, $phone, $id);
+            $stylist_test->save();
+
+            $new_name = "Gretchen Richardson";
+            $new_services = "Cut/Style, Color, Highlights, Perm";
+            $new_phone = "5033980234";
+
+            $stylist_test->update($new_name, $new_services, $new_phone);
+            $result = Stylist::find($stylist_test->getId());
+
+            $this->assertEquals($new_name, $result->getName());
+
+        }
+
     }
 
 

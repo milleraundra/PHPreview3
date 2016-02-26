@@ -97,6 +97,19 @@
             return $found_stylist;
         }
 
+        function delete()
+        {
+            $GLOBALS['DB']->exec("DELETE FROM stylists WHERE id = {$this->getId()};");
+        }
+
+        function update($new_name, $new_services, $new_phone)
+        {
+            $GLOBALS['DB']->exec("UPDATE stylists SET name = '{$new_name}', services = '{$new_services}', phone = '{$new_phone}' WHERE id = {$this->getId()};");
+            $this->setName($new_name);
+            $this->setServices($new_services);
+            $this->setPhone($new_phone);
+        }
+
     }
 
 
