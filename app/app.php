@@ -108,6 +108,12 @@
         return $app['twig']->render('stylist.html.twig', array('stylist'=>$stylist, 'clients'=>$matching_clients));
     });
 
+/* View All Stylists and Client */
+    $app->get('/view/all', function() use ($app) {
+        $clients = Client::getAll();
+        $stylists = Stylist::getAll();
+        return $app['twig']->render('all_stylists_clients.html.twig', array('stylists'=>$stylists, 'clients'=>$clients));
+    });
 
     return $app;
 
