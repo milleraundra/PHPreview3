@@ -86,11 +86,27 @@
         $stylist= Stylist::find($client->getStylistId());
         return $app['twig']->render('client.html.twig', array('client'=>$client, 'stylist'=>$stylist));
     });
+
     $app->get('/client/update/{id}', function($id) use ($app) {
         $client = Client::find($id);
         return $app['twig']->render('client_edit_delete.html.twig', array('client'=>$client));
     });
 /* Edit Individual Client Info */
+
+    $app->post('/client/update/{id}', function($id) use ($app) {
+        $client = Client::find($id);
+        $client->update($_POST['name'], $_POST['phone']);
+        $stylist = Stylist::find($client->getStylistId());
+        return $app['twig']->render('client.html.twig', array('client'=>$client, 'stylist'=>$stylist));
+    });
+
+    $app->post('/client/delete/{id}', function($id) use ($app) {
+        $client = Client::find($id);
+        $stylist = Stylist::find($client->getStylistId());
+        $client->delete();
+        $matching_clients = $stylist->getClients();
+        return $app['twig']->render('stylist.html.twig', array('stylist'=>$stylist, 'clients'=>$matching_clients));
+    });
 
 
     return $app;

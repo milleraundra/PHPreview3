@@ -11,11 +11,11 @@
             <div class="page-header">
                 <h1>Urbaca Salon</h1>
             </div>
-            <h2>Name: {{ client.getClient }}</h2>
+            <h2>Client: {{ client.getClient }}</h2>
             <h3>Number: {{ client.getNumber }}</h3>
             <h3>Stylist: {{ stylist.getName }}</h3>
     <!-- Update Stylist -->
-            <form class="" action="/client/update/{{ stylist.getId }}" method="get">
+            <form class="" action="/client/update/{{ client.getId }}" method="get">
                 <button type="submit">Edit/Delete Client</button>
             </form>
     <!--Home button -->
