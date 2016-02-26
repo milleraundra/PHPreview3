@@ -6,6 +6,7 @@
 */
 
     require_once __DIR__."/../src/Stylist.php";
+    require_once __DIR__."/../src/Client.php";
 
     $server = 'mysql:host=localhost;dbname=hair_salon_test';
     $username = 'root';
@@ -191,7 +192,21 @@
             $stylist_test = new Stylist($name, $services, $phone, $id);
             $stylist_test->save();
 
-            
+            $name2 = "Hamlet Lou";
+            $services2 = "Waxing";
+            $phone2 = "97123902341";
+            $stylist_test2 = new Stylist($name2, $services2, $phone2, $id);
+            $stylist_test2->save();
+
+            $client = "Lou Rouse";
+            $number = "5123423421";
+            $stylist_id = $stylist_test->getId();
+            $client_test = new Client($client, $number, $stylist_id, $id);
+            $client_test->save();
+
+            $result = $stylist_test->getClients();
+
+            $this->assertEquals([$client_test], $result);
         }
 
     }

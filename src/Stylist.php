@@ -60,7 +60,8 @@
 
         function save()
         {
-            $this->setServices($this->adjustPunctuation($this->getServices()));            $GLOBALS['DB']->exec("INSERT INTO stylists (name, services, phone) VALUES ('{$this->getName()}', '{$this->getServices()}', '{$this->getPhone()}');");
+            $this->setServices($this->adjustPunctuation($this->getServices()));
+            $GLOBALS['DB']->exec("INSERT INTO stylists (name, services, phone) VALUES ('{$this->getName()}', '{$this->getServices()}', '{$this->getPhone()}');");
             $this->id = $GLOBALS['DB']->lastInsertId();
         }
 
@@ -110,10 +111,19 @@
             $this->setPhone($new_phone);
         }
 
-        // function getClients()
-        // {
-        //     $
-        // }
+        function getClients()
+        {
+            $stylist_id = $this->getId();
+            $all_clients = Client::getAll();
+            $matching_clients = array();
+            foreach($all_clients as $client){
+                $client_stylist_id = $client->getStylistId();
+                if($stylist_id == $client_stylist_id) {
+                    array_push($matching_clients, $client);
+                }
+            }
+            return $matching_clients;
+        }
 
     }
 
