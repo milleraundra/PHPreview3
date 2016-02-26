@@ -12,8 +12,10 @@
                 <h1>Urbaca Salon</h1>
             </div>
             <h2>{{ stylist.getName }}</h2>
-            <h4>Clients:</h4>
+            <h3>{{ stylist.getServices }}</h3>
+            <h3>{{ stylist.getPhone }}</h3>
             {% if clients is not empty %}
+            <h4>Clients:</h4>
                 <ul>
                     {% for client in clients %}
                         <li><a href="#">{{ client.getClient }}</a></li>
@@ -22,7 +24,16 @@
             {% else %}
                 <p>This stylist does not have any clients yet.</p>
             {% endif %}
+    <!--Add a client -->
+            <form class="" action="/client/add/{{ stylist.getId }}" method="get">
+                <button type="submit">Add a Client</button>
+            </form>
 
+    <!-- Update Stylist -->
+            <form class="" action="/stylist/update/{{ stylist.getId }}" method="get">
+                <button type="submit">Edit/Delete Stylist</button>
+            </form>
+    <!--Home button -->
             <form class="" action="/" method="get">
                 <button type="submit">Home</button>
             </form>
