@@ -15,8 +15,8 @@
         'twig.path' => __DIR__.'/../views'
     ));
 
-    // use Symfony\Component\HttpFoundation\Request;
-    // Request::enableHttpMethodParameterOverride();
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
 
     /* Home page */
     $app->get('/', function() use ($app) {
@@ -38,7 +38,7 @@
         return $app['twig']->render('stylist.html.twig', array('stylist'=>$stylist, 'clients'=>$matching_clients));
     });
 
-    $app->post('/delete/all', function() use ($app) {
+    $app->delete('/delete/all', function() use ($app) {
         Stylist::deleteAll();
         Client::deleteAll();
         $stylists = Stylist::getAll();
@@ -57,14 +57,14 @@
         return $app['twig']->render('stylist_edit_delete.html.twig', array('stylist' => $stylist));
     });
 
-    $app->post('/stylist/update/{id}', function($id) use ($app) {
+    $app->patch('/stylist/update/{id}', function($id) use ($app) {
         $stylist = Stylist::find($id);
         $stylist->update($_POST['name'], $_POST['services'], $_POST['phone']);
         $matching_clients = $stylist->getClients();
         return $app['twig']->render('stylist.html.twig', array('stylist'=>$stylist, 'clients'=>$matching_clients));
     });
 
-    $app->post('/stylist/delete/{id}', function($id) use ($app) {
+    $app->delete('/stylist/delete/{id}', function($id) use ($app) {
         $stylist = Stylist::find($id);
         $stylist->delete();
         $stylists = Stylist::getAll();
@@ -93,14 +93,14 @@
     });
 /* Edit Individual Client Info */
 
-    $app->post('/client/update/{id}', function($id) use ($app) {
+    $app->patch('/client/update/{id}', function($id) use ($app) {
         $client = Client::find($id);
         $client->update($_POST['name'], $_POST['phone']);
         $stylist = Stylist::find($client->getStylistId());
         return $app['twig']->render('client.html.twig', array('client'=>$client, 'stylist'=>$stylist));
     });
 
-    $app->post('/client/delete/{id}', function($id) use ($app) {
+    $app->delete('/client/delete/{id}', function($id) use ($app) {
         $client = Client::find($id);
         $stylist = Stylist::find($client->getStylistId());
         $client->delete();

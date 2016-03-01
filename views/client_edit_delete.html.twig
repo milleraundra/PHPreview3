@@ -16,6 +16,7 @@
                 <div class="col-md-6">
                     <h2>Update Info for {{ client.getClient }}</h2>
                     <form class="" action="/client/update/{{ client.getId }}" method="post">
+                    <input name="_method" type="hidden" value="patch">
                         <label for="name">Full Name:</label>
                         <input type="text" name="name" value="{{ client.getClient }}">
                         <label for="phone">Phone Contact:</label>
@@ -27,10 +28,12 @@
 <!-- Delete Stylist -->
                 <div class="col-md-6">
                     <form class="" action="/client/delete/{{ client.getId }}" method="post">
+                        <input name="_method" type="hidden" value="delete">
                         <button type="submit" name="button">Delete Client</button>
                     </form>
 <!--Back Button -->
                     <form class="" action="/client/{{ client.getId }}" method="get">
+                        <input name="_method" type="hidden" value="delete">
                         <button type="submit">Back</button>
                     </form>
                 </div>
